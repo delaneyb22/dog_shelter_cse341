@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/delaneyb22/dog_shelter_cse341#readme",
   "dependencies": {
-    "express": "^4.21.0"
+    "express": "^4.21.0",
+    "swagger": "^0.7.5"
   }
 }
