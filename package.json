@@ -1,0 +1,19 @@
+{
+  "name": "dog_shelter_cse341",
+  "version": "1.0.0",
+  "description": "manage dogs in shelter",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/delaneyb22/dog_shelter_cse341.git"
+  },
+  "author": "delaney baker",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/delaneyb22/dog_shelter_cse341/issues"
+  },
+  "homepage": "https://github.com/delaneyb22/dog_shelter_cse341#readme"
+}
