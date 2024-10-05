@@ -1,0 +1,46 @@
+### Get all dogs
+GET http://localhost:3000/dogs
+
+### Get dog by ID
+GET http://localhost:3000/dogs/:id
+
+### Create dog
+POST http://localhost:3000/dogs HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Buddy",
+    "breed": "Golden Retriever",
+    "age": 3,
+    "weight": 50,
+    "shelter_id": 1,
+    "adoption_status": false,
+    "vaccination_records": [
+        {
+            "vaccination_type": "Rabies",
+            "vaccination_date": "2022-01-01"
+        }
+    ]
+}
+
+### Update dog
+PUT http://localhost:3000/dogs/:id HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Buddy",
+    "breed": "Golden Retriever",
+    "age": 3,
+    "weight": 50,
+    "shelter_id": 1,
+    "adoption_status": false,
+    "vaccination_records": [
+        {
+            "vaccination_type": "Rabies",
+            "vaccination_date": "2022-01-01"
+        }
+    ]
+}
+
+### Delete dog
+DELETE http://localhost:3000/dogs/:id HTTP/1.1

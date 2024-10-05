@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const Dog = require('../models/Dog');
+const Dog = require('../routes/dogs');
+//troubleshooting here
+//const dogsController = require('../controller/dogs');
 
 router.get('/', async (req, res) => {
   try {
