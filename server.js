@@ -3,7 +3,7 @@ const app = express();
 const router = require('./routes');
 const mongodb = require('./data/database');
 const bodyParser = require('body-parser');
-//const passport = require('passport');
+const passport = require('passport');
 //const jwt = require('jsonwebtoken');
 
 const port = process.env.PORT || 3000;

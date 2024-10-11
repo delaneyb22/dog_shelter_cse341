@@ -11,6 +11,17 @@
     "https",
     "http"
   ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "flow": "password",
+      "tokenUrl": "/api/auth/login",
+      "scopes": {
+        "read:dogs": "Read dogs",
+        "write:dogs": "Write dogs"
+      }
+    }
+  },
   "paths": {
     "/api-docs": {
       "get": {
@@ -22,9 +33,97 @@
         }
       }
     },
+    "/api/auth/register": {
+      "post": {
+        "description": "Register a new user",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "body",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "body",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User  created successfully"
+          },
+          "400": {
+            "description": "Invalid request"
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "description": "Login a user",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "body",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "body",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login successful",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid credentials"
+          }
+        }
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "description": "Logout a user",
+        "security": [
+          {
+            "OAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Logout successful"
+          }
+        }
+      }
+    },
     "/dogs/": {
       "get": {
         "description": "",
+        "security": [
+          {
+            "OAuth2": ["read:dogs"]
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -44,6 +143,11 @@
             "in": "path",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "OAuth2": ["read:dogs"]
           }
         ],
         "responses": {
