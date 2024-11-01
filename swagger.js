@@ -5,7 +5,7 @@ const doc = {
     title: 'Dog Shelter API',
     description: 'API for managing dogs in a shelter',
   },
-  host: process.env.HOST || 'localhost:3000', // Use an environment variable for the host
+  host: 'https://dog-shelter-cse341.onrender.com', // Use an environment variable for the host
   schemes: ['http', 'https'],
   version: '1.0.0', // Optional: add versioning
 };

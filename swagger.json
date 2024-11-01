@@ -1,27 +1,16 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Dog Shelter Api",
-    "description": "Api for managing dogs in a shelter",
+    "title": "Dog Shelter API",
+    "description": "API for managing dogs in a shelter",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "https://dog-shelter-cse341.onrender.com",
   "basePath": "/",
   "schemes": [
-    "https",
-    "http"
+    "http",
+    "https"
   ],
-  "securityDefinitions": {
-    "OAuth2": {
-      "type": "oauth2",
-      "flow": "password",
-      "tokenUrl": "/api/auth/login",
-      "scopes": {
-        "read:dogs": "Read dogs",
-        "write:dogs": "Write dogs"
-      }
-    }
-  },
   "paths": {
     "/api-docs": {
       "get": {
@@ -33,97 +22,9 @@
         }
       }
     },
-    "/api/auth/register": {
-      "post": {
-        "description": "Register a new user",
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "username",
-            "in": "body",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "password",
-            "in": "body",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "User  created successfully"
-          },
-          "400": {
-            "description": "Invalid request"
-          }
-        }
-      }
-    },
-    "/api/auth/login": {
-      "post": {
-        "description": "Login a user",
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "username",
-            "in": "body",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "password",
-            "in": "body",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Login successful",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "token": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Invalid credentials"
-          }
-        }
-      }
-    },
-    "/api/auth/logout": {
-      "post": {
-        "description": "Logout a user",
-        "security": [
-          {
-            "OAuth2": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Logout successful"
-          }
-        }
-      }
-    },
     "/dogs/": {
       "get": {
         "description": "",
-        "security": [
-          {
-            "OAuth2": ["read:dogs"]
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -145,11 +46,6 @@
             "type": "string"
           }
         ],
-        "security": [
-          {
-            "OAuth2": ["read:dogs"]
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -163,5 +59,6 @@
         }
       }
     }
-  }
+  },
+  "version": "1.0.0"
 }
