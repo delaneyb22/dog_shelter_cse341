@@ -12,7 +12,7 @@ const validateDog = [
   body('shelterId').notEmpty().withMessage('Shelter ID is required'),
 ];
 
-const getAllDogs = async (req, res) => {
+const getDogs = async (req, res) => {
   //#swagger.tags=['Dogs']
   try {
     const result = await mongodb.getDatabase().db().collection('dogs').find().toArray();
@@ -23,7 +23,7 @@ const getAllDogs = async (req, res) => {
   }
 };
 
-const getSingleDog = async (req, res) => {
+const getDog = async (req, res) => {
   //#swagger.tags=['Dogs']
   try {
     const dogId = new ObjectId(req.params.id);
