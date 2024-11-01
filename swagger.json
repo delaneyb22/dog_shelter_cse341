@@ -5,11 +5,11 @@
     "description": "API for managing dogs in a shelter",
     "version": "1.0.0"
   },
-  "host": "https://dog-shelter-cse341.onrender.com",
+  "host": "dog-shelter-cse341.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http",
-    "https"
+    "https",
+    "http"
   ],
   "paths": {
     "/api-docs": {
