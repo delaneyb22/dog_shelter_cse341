@@ -95,4 +95,14 @@ const updateDog = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: 'Some error occurred while updating the dog', error: error.message });
   }
-}
+};
+
+// Export the functions and validation middleware
+module.exports ={
+  createDog,
+  getDogs,
+  getDog,
+  updateDog,
+  validateCreateDog,
+  validateUpdateDog
+  };
