@@ -4,7 +4,9 @@ const router = require('./routes');
 const mongodb = require('./data/database');
 const bodyParser = require('body-parser');
 const passport = require('passport');
-//const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json'); 
 
 const port = process.env.PORT || 3000;
 
@@ -20,12 +22,15 @@ app.use((req, res, next) => {
 
 // Define the API endpoints
 const dogRouter = require('./routes/dogs');
-//const shelterRouter = require('./routes/shelters');
-//const authRouter = require('./routes/auth');
+// const shelterRouter = require('./routes/shelters');
+// const authRouter = require('./routes/auth');
 
 app.use('/api/dogs', dogRouter);
-//app.use('/api/shelters', shelterRouter);
-//app.use('/api/auth', authRouter);
+// app.use('/api/shelters', shelterRouter);
+// app.use('/api/auth', authRouter);
+
+// Serve Swagger documentation
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Connect to MongoDB
 mongodb.initDb((err) => {
@@ -33,9 +38,15 @@ mongodb.initDb((err) => {
     console.log(err);
   } else {
     app.listen(port, () => {
-      console.log(`Database is listening and node Running on port ${3000}`);
+      console.log(`Database is listening and node running on port ${port}`);
     });
   }
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: 'Internal Server Error' });
 });
 
 // Export the app
