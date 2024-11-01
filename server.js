@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 });
 
 // Define the API endpoints
-const dogRouter = require('./routes/dogs');
+const dogRouter = require('./routes');
 // const shelterRouter = require('./routes/shelters');
 // const authRouter = require('./routes/auth');
 
