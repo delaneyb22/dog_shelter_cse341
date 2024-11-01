@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
+const passport = require('passport');
 
 // Register user
 router.post('/register', async (req, res) => {
@@ -11,14 +12,11 @@ router.post('/register', async (req, res) => {
   const user = new mongoose.model('User ', { username, password: hashedPassword });
   try {
     await user.save();
-    res.status(201).send({ message: 'User  created successfully' });
+    res.status(201).send({ message: 'User created successfully' });
   } catch (err) {
     res.status(500).send({ message: 'Error creating user' });
   }
 });
-
-
-
 
 // Login user
 router.post('/login', async (req, res) => {
@@ -39,17 +37,28 @@ router.post('/login', async (req, res) => {
 
 // Logout user
 router.post('/logout', async (req, res) => {
-    const token = req.headers['authorization'];
-    if (!token) {
-      res.status(401).send({ message: 'Unauthorized' });
-    } else {
-      jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
-        if (err) {
-          res.status(401).send({ message: 'Invalid token' });
-        } else {
-          res.status(200).send({ message: 'Logged out successfully' });
-        }
-      });
-    }
-  });
-  
+  const token = req.headers['authorization'];
+  if (!token) {
+    res.status(401).send({ message: 'Unauthorized' });
+  } else {
+    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+      if (err) {
+        res.status(401).send({ message: 'Invalid token' });
+      } else {
+        res.status(200).send({ message: 'Logged out successfully' });
+      }
+    });
+  }
+});
+
+// Secure the POST endpoint for creating a new dog
+router.post('/dogs', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  // createDog function here
+});
+
+// Secure the PUT endpoint for updating a dog
+router.put('/dogs/:id', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  // updateDog function here
+});
+
+module.exports = router;
